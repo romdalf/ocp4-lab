@@ -1,0 +1,18 @@
+#-------------------------------------------------------------------------------------------#
+# Ansible Playbook for local deployment of OCP4 lab
+# https://github.com/rovandep/ocp4-lab
+#-------------------------------------------------------------------------------------------#
+
+## use this role to prepare the system with subscription manager, enabling required repositories
+## and do a system upgrade
+##
+## usage: -e "sysprep=yes"
+- hosts: DNSDHCP
+  gather_facts: false
+  become: yes
+  roles:
+#    - sysprep 
+    - dnsmasq
+#    - httpd
+    - ocp
+

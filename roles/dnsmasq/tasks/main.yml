@@ -1,0 +1,39 @@
+#-------------------------------------------------------------------------------------------#
+# Ansible Playbook for configuring dnsmasq for dns & dhcp 
+# 2020 - romuald@redhat.com 
+#-------------------------------------------------------------------------------------------#
+
+- name: Install dnsmasq 
+  yum:
+    name: "dnsmasq"
+    state: latest
+
+- name: Enabling dnsmasq service
+  service:
+    name: dnsmasq
+    enabled: yes
+    state: started 
+
+- name: Inject dnsmasq configuration file
+  template: 
+    src: files/dnsmasq_conf.j2
+    dest: /etc/dnsmasq.conf
+    
+- name: Inject hosts configuration file
+  template:
+    src: files/hosts.j2
+    dest: /etc/hosts 
+
+- name: Configure firewall for dns & dhcp services
+  firewalld: 
+    zone: public
+    service: "{{ item }}"
+    state: enabled
+    immediate: yes 
+    permanent: true
+  with_items: [dns,dhcp]
+
+- name: Restarting dnsmasq service
+  service:
+    name: dnsmasq
+    state: restarted

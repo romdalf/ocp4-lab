@@ -1,0 +1,14 @@
+# Modified by Ansible Playbook for configuring dnsmasq for dns & dhcp 
+# https://github.com/rovandep/ocp4-lab
+
+
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+{{ ansible_host }}      rhel7-infra.{{ labdomain }} rhel7-infra
+{{ dhcpiprange }}.51  wkr01.{{ labdomain }}   wkr01
+{{ dhcpiprange }}.52  wkr02.{{ labdomain }}   wkr02
+{{ dhcpiprange }}.53  wkr03.{{ labdomain }}   wkr03 
+
+
+

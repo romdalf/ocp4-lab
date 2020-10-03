@@ -1,0 +1,80 @@
+#-------------------------------------------------------------------------------------------#
+# Ansible Playbook for deploying OCP4 
+# https://github.com/rovandep/ocp4-lab
+#-------------------------------------------------------------------------------------------#
+
+- name: Create OCP temp directory
+  file:
+    path: /var/www/html/ocp-installer
+    state: directory
+
+- name: Unarchive latest openshift installer 
+  unarchive:
+    src: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux.tar.gz
+    dest: /var/www/html/ocp-installer
+    remote_src: yes
+
+- name: Unarchive latest openshift cli command 
+  unarchive:
+    src: https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz
+    dest: /usr/bin
+    remote_src: yes 
+
+- name: Create installation directory
+  file:
+    path: "/var/www/html/ocp-installer/{{ clustername }}"
+    state: directory
+
+- name: Inject installation template
+  template:
+    src: files/install-config_yml.j2
+    dest: "/var/www/html/ocp-installer/{{ clustername }}/install-config.yaml"
+
+- name: Call openshift-installer to create manifest
+  shell: ./openshift-install create manifests --dir={{ clustername }}
+  args:
+    chdir: /var/www/html/ocp-installer
+    executable: /bin/bash
+
+- name: Call openshift-installer to create ignition config files
+  shell: ./openshift-install create ignition-configs --dir={{ clustername }}
+  args:
+    chdir: /var/www/html/ocp-installer
+    executable: /bin/bash
+
+- name: Create RHCOS directory
+  file:
+    path: /var/www/html/rhcos
+    state: directory
+
+- name: Download latest RHCOS iso
+  get_url:
+    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-installer.x86_64.iso
+    dest: /var/www/html/rhcos
+
+- name: Download latest RHCOS raw
+  get_url:
+    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-metal.x86_64.raw.gz
+    dest: /var/www/html/rhcos
+
+- name: Download latest RHCOS kernel
+  get_url:
+    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-4.5.6-x86_64-installer-kernel-x86_64
+    dest: /var/www/html/rhcos
+
+- name: Download latest RHCOS initramfs
+  get_url:
+    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img
+    dest: /var/www/html/rhcos
+
+- name: fixing permissions
+  shell: chmod +r *
+  args: 
+    chdir: /var/www/html/ocp-installer/{{ clustername }}
+    executable: /bin/bash
+
+- name: fixing permissions
+  shell: chmod +r *
+  args: 
+    chdir: /var/www/html/rhcos
+    executable: /bin/bash
