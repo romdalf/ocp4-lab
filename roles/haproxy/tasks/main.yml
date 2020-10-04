@@ -1,0 +1,21 @@
+#-------------------------------------------------------------------------------------------#
+# Ansible Playbook for configuring haproxy for dns & dhcp 
+# https://github.com/rovandep/ocp4-lab
+#-------------------------------------------------------------------------------------------#
+
+- name: Enabling haproxy service
+  service:
+    name: haproxy
+    enabled: yes
+    state: started 
+
+- name: Inject haproxy configuration file
+  template: 
+    src: files/haproxy_cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    
+- name: Restarting haproxy service
+  service:
+    name: haproxy
+    state: restarted
+

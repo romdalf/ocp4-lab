@@ -67,14 +67,3 @@
     url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-installer-initramfs.x86_64.img
     dest: /var/www/html/rhcos
 
-- name: fixing permissions
-  shell: chmod +r *
-  args: 
-    chdir: /var/www/html/ocp-installer/{{ clustername }}
-    executable: /bin/bash
-
-- name: fixing permissions
-  shell: chmod 777 -R rhcos
-  args: 
-    chdir: /var/www/html/
-    executable: /bin/bash
