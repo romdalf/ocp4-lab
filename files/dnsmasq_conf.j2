@@ -20,5 +20,5 @@ srv-host=_etcd-server-ssl._tcp.{{ clustername }}.{{ labdomain }},etcd-0.{{ clust
 
 enable-tftp
 tftp-root=/var/www/html/rhcos
-tftp-no-fail
-tftp-no-blocksize
+dhcp-boot=lpxelinux.0
+

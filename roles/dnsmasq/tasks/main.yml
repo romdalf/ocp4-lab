@@ -24,6 +24,11 @@
     src: files/hosts.j2
     dest: /etc/hosts 
 
+- name: Inject pxelinux configuration file
+  template:
+    src: files/lpxelinux_0.j2
+    dest: /var/www/html/rhcos/lpxelinux.0
+
 - name: Configure firewall for dns & dhcp services
   firewalld: 
     zone: public
@@ -31,9 +36,10 @@
     state: enabled
     immediate: yes 
     permanent: true
-  with_items: [dns,dhcp]
+  with_items: [dns,dhcp,tftp]
 
 - name: Restarting dnsmasq service
   service:
     name: dnsmasq
     state: restarted
+
