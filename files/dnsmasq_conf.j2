@@ -26,10 +26,18 @@ address=/ocp-mst-01.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.51
 ptr-record=51.{{ ptriprange }}.in-addr.arpa,ocp-mst-01.{{ clustername}}.{{ labdomain }}
 dhcp-host=52:54:00:cf:00:b6,{{dhcpiprange}}.51
 
+address=/ocp-mst-02.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.52
+ptr-record=52.{{ ptriprange }}.in-addr.arpa,ocp-mst-02.{{ clustername}}.{{ labdomain }}
+dhcp-host=52:54:00:cf:00:b6,{{dhcpiprange}}.52
+
+address=/ocp-mst-03.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.53
+ptr-record=53.{{ ptriprange }}.in-addr.arpa,ocp-mst-03.{{ clustername}}.{{ labdomain }}
+dhcp-host=52:54:00:cf:00:b6,{{dhcpiprange}}.53
+
 # worker entry 
-address=/ocp-wkr-01.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.61
-ptr-record=61.{{ ptriprange }}.in-addr.arpa,ocp-wkr-01.{{ clustername}}.{{ labdomain }}
-dhcp-host=52:54:00:34:0d:e8,{{ dhcpiprange }}.61
+#address=/ocp-wkr-01.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.61
+#ptr-record=61.{{ ptriprange }}.in-addr.arpa,ocp-wkr-01.{{ clustername}}.{{ labdomain }}
+#dhcp-host=52:54:00:34:0d:e8,{{ dhcpiprange }}.61
 
 # cluster url entrypoints 
 address=/api.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10

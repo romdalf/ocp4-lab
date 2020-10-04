@@ -1,11 +1,9 @@
 ServerRoot "/etc/httpd"
-Listen 80
+Listen {{ dhcpiprange }}.10:8080
 Include conf.modules.d/*.conf
 
 User apache
 Group apache
-
-ServerName rhel7-infra.{{ labdomain }}80
 
 <Directory />
     AllowOverride none
