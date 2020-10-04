@@ -12,11 +12,37 @@ dhcp-option=option:router,{{ dhcproute }}
 dhcp-authoritative
 dhcp-leasefile=/var/lib/dnsmasq/dnsmasq.leases
 
-address=/{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.51
-address=/{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.52
-address=/{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.53
+#OCP Services
+address=/infra.{{ labdomain }}/{{ dhcpiprange }}.10
+ptr-record=10.{{ ptriprange }}.in-addr.arpa,infra.{{ labdomain }}
 
-srv-host=_etcd-server-ssl._tcp.{{ clustername }}.{{ labdomain }},etcd-0.{{ clustername }}.{{ labdomain }}
+# bootstrap entry 
+address=/ocp-bootstrap.{{ clustername}}.{{ labdomain }}/{{ dhcpiprange}}.50
+ptr-record=50.{{ ptriprange }}.in-addr.arpa,ocp-boostrap.{{ clustername}}.{{ labdomain }}
+dhcp-host=52:54:00:dd:ec:bd,{{ dhcpiprange}}.50
+
+# master entry 
+address=/ocp-mst-01.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.51
+ptr-record=51.{{ ptriprange }}.in-addr.arpa,ocp-mst-01.{{ clustername}}.{{ labdomain }}
+dhcp-host=52:54:00:cf:00:b6,{{dhcpiprange}}.51
+
+# worker entry 
+address=/ocp-wkr-01.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.61
+ptr-record=61.{{ ptriprange }}.in-addr.arpa,ocp-wkr-01.{{ clustername}}.{{ labdomain }}
+dhcp-host=52:54:00:34:0d:e8,{{ dhcpiprange }}.61
+
+# cluster url entrypoints 
+address=/api.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
+ptr-record=10.{{ ptriprange }}.in-addr.arpa,api.{{ clustername}}.{{ labdomain }}
+address=/api-int.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
+ptr-record=10.{{ ptriprange }}.in-addr.arpa,api-int.{{ clustername}}.{{ labdomain }}
+address=/apps.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
+address=/console-openshift-console.apps.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
+address=/oauth-openshift.apps.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
+address=/etcd-0.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.61
+
+srv-host=_etcd-server-ssl._tcp.{{ clustername }}.{{ labdomain }},etcd-0.{{ clustername }}
+
 
 enable-tftp
 tftp-root=/var/www/html/rhcos

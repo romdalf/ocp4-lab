@@ -3,11 +3,6 @@
 # https://github.com/rovandep/ocp4-lab
 #-------------------------------------------------------------------------------------------#
 
-- name: Install httpd
-  yum:
-    name: "httpd"
-    state: latest
-
 - name: Enabling httpd service
   service:
     name: httpd
@@ -18,15 +13,6 @@
   template:
     src: files/httpd_conf.j2
     dest: /etc/httpd/conf/httpd.conf 
-
-- name: Configure firewall for httpd
-  firewalld: 
-    zone: public
-    service: "{{ item }}"
-    state: enabled
-    immediate: yes 
-    permanent: true
-  with_items: [http]
 
 - name: Restarting httpd service
   service:

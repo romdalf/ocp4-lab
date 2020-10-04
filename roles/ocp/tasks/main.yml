@@ -59,12 +59,12 @@
 
 - name: Download latest RHCOS kernel
   get_url:
-    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-4.5.6-x86_64-installer-kernel-x86_64
+    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-installer-kernel-x86_64
     dest: /var/www/html/rhcos
 
 - name: Download latest RHCOS initramfs
   get_url:
-    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img
+    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-installer-initramfs.x86_64.img
     dest: /var/www/html/rhcos
 
 - name: fixing permissions

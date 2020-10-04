@@ -34,3 +34,19 @@
     name: "*"
     state: latest
 
+- name: Install all required packages for Infra Services VM
+  yum:
+    name: 
+      - dnsmasq
+      - httpd
+      - haproxy
+    state: latest
+
+- name: Configure firewall for httpd
+  firewalld: 
+    zone: public
+    service: "{{ item }}"
+    state: enabled
+    immediate: yes 
+    permanent: true
+  with_items: [dns,dhcp,http,tftp]

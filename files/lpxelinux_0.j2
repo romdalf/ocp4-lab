@@ -1,7 +1,3 @@
-DEFAULT rhcos 
-TIMEOUT 20
-PROMPT 0
-LABEL rhcos 
-    MENU LABEL 0^1 - RHCOS
-    KERNEL http://{{ ansible_host }}/rhcos/rhcos-4.5.6-x86_64-installer-kernel-x86_64
-    APPEND ip=dhcp rd.neednet=1 initrd=http://{{ ansible_host }}/rhcos/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://{{ ansible_host }}/rhcos/rhcos-metal.x86_64.raw.gz coreos.inst.ignition_url=http://{{ ansible_host }}/ocp-installer/cluster/bootstrap.ign
+kernel  http://{{ ansible_host }}/rhcos/rhcos-installer-kernel-x86_64 ip=dhcp rd.neednet=1 initrd=http://{{ ansible_host }}/rhcos/rhcos-installer-initramfs.x86_64.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://{{ ansible_host }}/rhcos/rhcos-metal.x86_64.raw.gz coreos.inst.ignition_url=http://{{ ansible_host }}/ocp-installer/cluster/bootstrap.ign
+initrd  http://{{ ansible_host }}/rhcos/rhcos-installer-initramfs.x86_64.img
+boot 

@@ -1,12 +1,19 @@
 #-------------------------------------------------------------------------------------------#
 # Ansible Playbook for configuring dnsmasq for dns & dhcp 
-# 2020 - romuald@redhat.com 
+# https://github.com/rovandep/ocp4-lab
 #-------------------------------------------------------------------------------------------#
 
-- name: Install dnsmasq 
-  yum:
-    name: "dnsmasq"
-    state: latest
+- name: fixing permissions
+  shell: chmod +r *
+  args: 
+    chdir: /var/www/html/ocp-installer/{{ clustername }}
+    executable: /bin/bash
+
+- name: fixing permissions
+  shell: chmod 777 -R rhcos
+  args: 
+    chdir: /var/www/html/
+    executable: /bin/bash
 
 - name: Enabling dnsmasq service
   service:
@@ -28,15 +35,6 @@
   template:
     src: files/lpxelinux_0.j2
     dest: /var/www/html/rhcos/lpxelinux.0
-
-- name: Configure firewall for dns & dhcp services
-  firewalld: 
-    zone: public
-    service: "{{ item }}"
-    state: enabled
-    immediate: yes 
-    permanent: true
-  with_items: [dns,dhcp,tftp]
 
 - name: Restarting dnsmasq service
   service:

@@ -11,7 +11,7 @@
   gather_facts: false
   become: yes
   roles:
-#    - sysprep 
-#    - httpd
+    - sysprep 
+    - httpd
     - ocp
     - dnsmasq
