@@ -54,7 +54,6 @@ backend okd4_k8s_api_be
     server      ocp-mst-02 {{ dhcpiprange }}.52:6443 check
     server      ocp-mst-03 {{ dhcpiprange }}.53:6443 check
 
-
 frontend okd4_machine_config_server_fe
     bind :22623
     default_backend okd4_machine_config_server_be
