@@ -51,8 +51,11 @@ address=/etcd-0.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.61
 
 srv-host=_etcd-server-ssl._tcp.{{ clustername }}.{{ labdomain }},etcd-0.{{ clustername }}
 
+dhcp-no-override
 
 enable-tftp
-tftp-root=/var/www/html/rhcos
-dhcp-boot=lpxelinux.0
-
+dhcp-match=ipxe,175
+tftp-root=/var/www/html/tftp
+dhcp-boot=net:#ipxe,undionly.kkpxe.0
+dhcp-boot=pxelinux.0
+dhcp-option-force=209,pxelinux.cfg/default

@@ -40,6 +40,8 @@
       - dnsmasq
       - httpd
       - haproxy
+      - syslinux
+      - tftp-server
     state: latest
 
 - name: Configure firewall for httpd

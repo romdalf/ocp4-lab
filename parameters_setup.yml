@@ -5,13 +5,14 @@ rhn_user: ""
 rhn_pass: ""
 rhn_pool: ""
 
+## OCP Pull Secret
+mypullsecret: ''
+
 ## DNS/DHCP settings
 clustername: "cluster"
 labdomain: "my.lab"
 dhcpiprange: "192.168.100"
 ptriprange: "100.168.192"
-dhcprange: "{{ dhcpiprange }}.20,{{ dhcpiprange }}.100,24h"
+dhcprange: "{{ dhcpiprange }}.20,{{ dhcpiprange }}.30,24h"
 dhcproute: "{{ dhcpiprange }}.1"
 
-## install-config pull secret
-mypullsecret: ""

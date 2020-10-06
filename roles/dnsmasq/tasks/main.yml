@@ -10,16 +10,10 @@
     executable: /bin/bash
 
 - name: fixing permissions
-  shell: chmod 777 -R rhcos
+  shell: chmod 777 -R tftp
   args: 
     chdir: /var/www/html/
     executable: /bin/bash
-
-- name: Enabling dnsmasq service
-  service:
-    name: dnsmasq
-    enabled: yes
-    state: started 
 
 - name: Inject dnsmasq configuration file
   template: 
@@ -31,13 +25,19 @@
     src: files/hosts.j2
     dest: /etc/hosts 
 
-- name: Inject pxelinux configuration file
-  template:
-    src: files/lpxelinux_0.j2
-    dest: /var/www/html/rhcos/lpxelinux.0
+- name: Copy syslinux file for tftp server usage
+  copy:
+    src: /usr/share/syslinux/
+    dest: /var/www/html/tftp/
+    remote_src: yes
 
-- name: Restarting dnsmasq service
+- name: Inject default pxelinux configuration file
+  template:
+    src: files/tftp_default.j2
+    dest: /var/www/html/tftp/pxelinux.cfg/default
+
+- name: Enabling dnsmasq service
   service:
     name: dnsmasq
-    state: restarted
-
+    enabled: yes
+    state: started 

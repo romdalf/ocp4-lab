@@ -3,18 +3,13 @@
 # https://github.com/rovandep/ocp4-lab
 #-------------------------------------------------------------------------------------------#
 
-- name: Enabling httpd service
-  service:
-    name: httpd
-    enabled: yes
-    state: started 
-
 - name: Inject configuration file
   template:
     src: files/httpd_conf.j2
     dest: /etc/httpd/conf/httpd.conf 
 
-- name: Restarting httpd service
+- name: Enabling httpd service
   service:
     name: httpd
-    state: restarted
+    enabled: yes
+    state: started 
