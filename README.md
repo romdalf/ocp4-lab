@@ -274,5 +274,5 @@ Once you're done with the last steps, you can start create a project or connect 
 4. allow a setup with an external LoadBalancer
 5. change the fix permission with a more elegant solution
 6. automatic VM creation on libvirt
-7. modify the dnsmasq_conf.j2 MAC address entry with a variable to be set in the parameters_setup.yml file
+~~7. modify the dnsmasq_conf.j2 MAC address entry with a variable to be set in the parameters_setup.yml file~~
 8. create a play for the post boostrap steps

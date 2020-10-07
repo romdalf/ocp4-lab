@@ -16,3 +16,7 @@ ptriprange: "100.168.192"
 dhcprange: "{{ dhcpiprange }}.20,{{ dhcpiprange }}.30,24h"
 dhcproute: "{{ dhcpiprange }}.1"
 
+bootstrapmac: ""
+master1mac: ""
+master2mac: ""
+master3mac: ""
