@@ -239,14 +239,24 @@ To monitor the "progress", you can ssh to your infra virtual machine, and do the
 
 ```
 $ cd /var/www/html/ocp-installer
-$ sudo ./openshift-install --dir=cluster wait-for bootstrap-complete
+$ sudo ./openshift-install --dir=cluster wait-for bootstrap-complete --log-level debug
+DEBUG OpenShift Installer 4.5.13                   
+DEBUG Built from commit 9893a482f310ee72089872f1a4caea3dbec34f28 
 INFO Waiting up to 20m0s for the Kubernetes API at https://api.cluster.my.lab:6443... 
+DEBUG Still waiting for the Kubernetes API: Get https://api.cluster.my.lab:6443/version?timeout=32s: EOF 
+DEBUG Still waiting for the Kubernetes API: the server could not find the requested resource 
+DEBUG Still waiting for the Kubernetes API: the server could not find the requested resource 
+DEBUG Still waiting for the Kubernetes API: Get https://api.cluster.my.lab:6443/version?timeout=32s: EOF 
 INFO API v1.18.3+47c0e71 up                       
 INFO Waiting up to 40m0s for bootstrapping to complete... 
+DEBUG Bootstrap status: complete                   
 INFO It is now safe to remove the bootstrap resources 
-INFO Time elapsed: 8m2s                           
-
+DEBUG Time elapsed per stage:                      
+DEBUG Bootstrap Complete: 13m36s                   
+DEBUG                API: 1m25s                    
+INFO Time elapsed: 13m36s                             
 ```
+
 When the above message appears, the bootstrap machine can be stopped and remove from the loadbalancer.
 
 Then, while still being in the same directory, do the followings to verify connectivity to the cluster:
@@ -276,3 +286,4 @@ Once you're done with the last steps, you can start create a project or connect 
 6. automatic VM creation on libvirt
 7. ~~modify the dnsmasq_conf.j2 MAC address entry with a variable to be set in the parameters_setup.yml file~~
 8. create a play for the post boostrap steps
+9. implementing a delete of the existing deployment in case of redeployment to avoid certificate like x509: certificate has expired or is not yet valid
