@@ -17,28 +17,28 @@ address=/infra.{{ labdomain }}/{{ dhcpiprange }}.10
 ptr-record=10.{{ ptriprange }}.in-addr.arpa,infra.{{ labdomain }}
 
 # bootstrap entry 
-address=/ocp-bootstrap.{{ clustername}}.{{ labdomain }}/{{ dhcpiprange}}.50
-ptr-record=50.{{ ptriprange }}.in-addr.arpa,ocp-boostrap.{{ clustername}}.{{ labdomain }}
-dhcp-host={{ bootstrapmac }},{{ dhcpiprange}}.50
+address=/ocp-bootstrap.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.50
+ptr-record=50.{{ ptriprange }}.in-addr.arpa,ocp-boostrap.{{ clustername }}.{{ labdomain }}
+dhcp-host={{ bootstrapmac }},{{ dhcpiprange }}.50
 
 # master entry 
 address=/ocp-mst-01.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.51
-ptr-record=51.{{ ptriprange }}.in-addr.arpa,ocp-mst-01.{{ clustername}}.{{ labdomain }}
-dhcp-host={{ master1mac }},{{dhcpiprange}}.51
+ptr-record=51.{{ ptriprange }}.in-addr.arpa,ocp-mst-01.{{ clustername }}.{{ labdomain }}
+dhcp-host={{ master1mac }},{{ dhcpiprange }}.51
 
 address=/ocp-mst-02.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.52
-ptr-record=52.{{ ptriprange }}.in-addr.arpa,ocp-mst-02.{{ clustername}}.{{ labdomain }}
-dhcp-host={{ master2mac }},{{dhcpiprange}}.52
+ptr-record=52.{{ ptriprange }}.in-addr.arpa,ocp-mst-02.{{ clustername }}.{{ labdomain }}
+dhcp-host={{ master2mac }},{{ dhcpiprange }}.52
 
 address=/ocp-mst-03.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.53
-ptr-record=53.{{ ptriprange }}.in-addr.arpa,ocp-mst-03.{{ clustername}}.{{ labdomain }}
-dhcp-host={{ master3mac }},{{dhcpiprange}}.53
+ptr-record=53.{{ ptriprange }}.in-addr.arpa,ocp-mst-03.{{ clustername }}.{{ labdomain }}
+dhcp-host={{ master3mac }},{{ dhcpiprange }}.53
 
 # cluster url entrypoints 
 address=/api.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
-ptr-record=10.{{ ptriprange }}.in-addr.arpa,api.{{ clustername}}.{{ labdomain }}
+ptr-record=10.{{ ptriprange }}.in-addr.arpa,api.{{ clustername }}.{{ labdomain }}
 address=/api-int.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
-ptr-record=10.{{ ptriprange }}.in-addr.arpa,api-int.{{ clustername}}.{{ labdomain }}
+ptr-record=10.{{ ptriprange }}.in-addr.arpa,api-int.{{ clustername }}.{{ labdomain }}
 address=/apps.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
 address=/console-openshift-console.apps.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
 address=/oauth-openshift.apps.{{ clustername }}.{{ labdomain }}/{{ dhcpiprange }}.10
