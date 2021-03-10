@@ -1,26 +1,28 @@
 # OpenShift Container Platform 4 Lab
-This set of ansible plays provides the necessary automation to deploy a OCP4 lab environment with the help of libvirt. 
+This set of ansible plays provides the necessary automation to deploy a OCP4 lab environment using the bare metal UPI method.
+Doing so provides platform agnostic approach which will fit any on-prem or cloud based deployment. 
 
 Notes: 
-0. this assume that you have some understanding about OCP4 and how its deployment workflow.
-1. as it uses PXE to provision the OCP4 machines, this should also work with any hypervisor or bare metal. 
-2. it requires valid RHEL subscriptions and access to Red Hat Infrastucture Provider for OpenShift Cluster Manager website.
+0. knowledge of OCP installation is required, this is not (yet) a fully assisted deployment
+1. a single bastion host with 2vCPUs, 4GB RAM, and 30GB of HDD should be sufficient
+2. if RHEL is used, valid subscriptions are required
 
 ## Environment
-The automation will require a first RHEL7 VM that will act as a:
-- dhcp server
-- dns server
-- pxe server
-- http server
-- haproxy server
+The automation will require a first CentOS VM that will act as a:
+- DHCP server
+- DNS server
+- PXE server
+- HTTP server
+- HAPROXY server
 
-The above will help in the provisioning of the OCP4 environment along wiht being the required loadbalancer for OCP4. Remember, this is a lab ;)
+The above will help in the provisioning of the OCP4 environment. Note that the DNS & HAPROXY are not a replacement for enterprise solutions and should
+only be considered within the context of a lab or helper till the production DNS and load balancers are available and configured. 
 
-Then you will have to create:
-- 1 VM for the OCP4 bootstrap, this one will be decommissioned at the end of the deployment
-- 3 VMs for the master nodes acting also as workers (this is a lab!). 
-These VMs will have:
-- either the RHEL Unknown or Fedora CoreOS Operating System definition in your hypervisor.
+The following (virtual) machines will be required
+- 1 (V)M for the bastion host
+- 1 (V)M for the OCP4 bootstrap, this one will be decommissioned at the end of the deployment
+- 3 (V)M for the master nodes acting also as workers (this is a lab!). 
+These (V)Ms will have:
 - the boot from network as first option to allow the PXE boot and don't forget the let the hard drive a secondary chose so that it can boot automatically
 
 ## Create the OCP4 lab
