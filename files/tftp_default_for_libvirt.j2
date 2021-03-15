@@ -10,15 +10,15 @@ LABEL local
         LOCALBOOT 0
 LABEL 1
         MENU LABEL 1^) OCP4 bootstrap
-        KERNEL http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-installer-kernel-x86_64
-        APPEND ip=dhcp rd.neednet=1 initrd=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-installer-initramfs.x86_64.img coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-metal.x86_64.raw.gz coreos.inst.ignition_url=http://{{ dhcpiprange }}.10:8080/ocp-installer/cluster/bootstrap.ign
+        KERNEL http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-live-kernel-x86_64
+        APPEND ip=dhcp rd.neednet=1 initrd=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-live-initramfs.x86_64.img coreos.inst=yes coreos.inst.install_dev=sda coreos.live.rootfs_url=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-live-rootfs.x86_64.img coreos.inst.ignition_url=http://{{ dhcpiprange }}.10:8080/ocp-installer/cluster/bootstrap.ign
 
 LABEL 2
         MENU LABEL 2^) OCP4 master
-        KERNEL http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-installer-kernel-x86_64
-        APPEND ip=dhcp rd.neednet=1 initrd=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-installer-initramfs.x86_64.img coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-metal.x86_64.raw.gz coreos.inst.ignition_url=http://{{ dhcpiprange }}.10:8080/ocp-installer/cluster/master.ign
+        KERNEL http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-live-kernel-x86_64
+        APPEND ip=dhcp rd.neednet=1 initrd=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-live-initramfs.x86_64.img coreos.inst=yes coreos.inst.install_dev=sda coreos.live.rootfs_url=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-live-rootfs.x86_64.img coreos.inst.ignition_url=http://{{ dhcpiprange }}.10:8080/ocp-installer/cluster/master.ign
 
-LABEL 2
+LABEL 3
         MENU LABEL 3^) OCP4 worker
-        KERNEL http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-installer-kernel-x86_64
-        APPEND ip=dhcp rd.neednet=1 initrd=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-installer-initramfs.x86_64.img coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-metal.x86_64.raw.gz coreos.inst.ignition_url=http://{{ dhcpiprange }}.10:8080/ocp-installer/cluster/worker.ign
+        KERNEL http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-live-kernel-x86_64
+        APPEND ip=dhcp rd.neednet=1 initrd=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-live-initramfs.x86_64.img coreos.inst=yes coreos.inst.install_dev=sda coreos.live.rootfs_url=http://{{ dhcpiprange }}.10:8080/tftp/rhcos/rhcos-live-rootfs.x86_64.img coreos.inst.ignition_url=http://{{ dhcpiprange }}.10:8080/ocp-installer/cluster/worker.ign
