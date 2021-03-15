@@ -2,32 +2,9 @@
 # Ansible Playbook for registering a host and updating the system
 # https://github.com/rovandep/ocp4-lab
 #-------------------------------------------------------------------------------------------#
-
-- name: Verify if host is already registered 
-  ignore_errors: true
-  shell: "subscription-manager status"
-  register: status
-
-- debug:
-    msg: "Logging in as {{ rhn_user }} with pool {{ rhn_pool }}" 
-  when: status.rc|int > 0
-
-- name: Subscribe to RHN
-  redhat_subscription: 
-    username: "{{ rhn_user }}"
-    password: "{{ rhn_pass }}"
-    pool_ids: "{{ rhn_pool }}"
-  when: status.rc|int > 0
-
-- name: Disable Repositories 
-  rhsm_repository:
-    name: "*"
-    state: disabled
-  
-- name: Enable Repositories
-  rhsm_repository: 
-    name: "rhel-7-server-rpms,rhel-7-server-optional-rpms,rhel-7-server-extras-rpms"
-    state: enabled
+---
+- include: redhat.yaml
+  when: ansible_distribution == 'Red Hat Enterprise Linux'
     
 - name: Update system
   yum:
