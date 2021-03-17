@@ -35,6 +35,7 @@ Except for the bastion, all the (virtual) machine will be configured to boot fro
 
 ## prerequisites 
 Once the bastion host is available, make sure the bastion to connect via a SSH key pair. 
+If the bastion host is RHEL machine, remember to register the machine with the appropriate subscription. 
 
 ### get ocp4-lab
 To get a local copy of the git repo, perform the following:
@@ -43,22 +44,38 @@ To get a local copy of the git repo, perform the following:
 git clone https://github.com/rovandep/ocp4-lab.git
 ```
 
-### parameters_setup.yaml
+### customize parameters_setup.yaml
+Prior to start any plays, a couple of parameters are required to be defined in "parameters_setup.yaml". Here is an an overview of the file:
 
-First of all, if the bastion host is RHEL based, make sure the (V)M is registered and can install packages. If not, fix this first!
+```YAML 
+---
+## OCP Pull Secret
+mypullsecret: ''
 
-Prior to start any plays, a couple of parameters are required to be defined within the "parameters_setup.yaml". 
+## DNS/DHCP settings
 
-The following parameters are used to customized the OCP4 cluster. The
+dnsforwarder01: "8.8.8.8"
+dnsforwarder02: "8.8.4.4"
+
 clustername: "cluster"
 labdomain: "my.lab"
-
-The following parameters are used to customized the DHCP servers and fit your network. 
-dhciprange: "192.168.100"
+dhcpiprange: "192.168.100"
 ptriprange: "100.168.192"
 dhcprange: "{{ dhcpiprange }}.20,{{ dhcpiprange }}.30,24h"
 dhcproute: "{{ dhcpiprange }}.1"
-Note: don't change/remove {{ dhcpiprange }} from dhcprange or dhcproute unless you know what you're doing.
+
+bootstrapmac: ""
+master1mac: ""
+master2mac: ""
+master3mac: ""
+
+### For RHEL only
+## Credentials to connect to RHN CDN and using a pool ID
+## note this will be replace later in favor of Vault
+rhn_user: ""
+rhn_pass: ""
+rhn_pool: ""
+```
 
 ### The play
 Edit the inventory file to target your infra virtual machine.
