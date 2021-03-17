@@ -49,25 +49,42 @@ Prior to start any plays, a couple of parameters are required to be defined in "
 
 ```YAML 
 ---
-## OCP Pull Secret
-mypullsecret: ''
-
 ## DNS/DHCP settings
-
+## use public or corporate DNS
 dnsforwarder01: "8.8.8.8"
 dnsforwarder02: "8.8.4.4"
 
+## OCP Pull Secret
+mypullsecret: ''
+
+## OCP cluster settings
 clustername: "cluster"
 labdomain: "my.lab"
+## the above example gives:
+## - api.cluster.my.lab
+## - api-int.cluster.my.lab
+## - apps.cluster.my.lab 
+
+## DHCP settings
 dhcpiprange: "192.168.100"
 ptriprange: "100.168.192"
 dhcprange: "{{ dhcpiprange }}.20,{{ dhcpiprange }}.30,24h"
 dhcproute: "{{ dhcpiprange }}.1"
-
+## the above example gives:
+## - a DHCP range from 192.168.100.20 till .30 
+## - a gateway being 192.168.100.1
+## notes:
+## - don't change the ansible variables
+## - no concept of subnet here
 bootstrapmac: ""
 master1mac: ""
 master2mac: ""
 master3mac: ""
+worker1mac: ""
+worker2mac: ""
+## the above entries are to register the mac address with 
+## an IP to provide a fix lease approach to ease the haproxy
+## settings
 
 ### For RHEL only
 ## Credentials to connect to RHN CDN and using a pool ID
