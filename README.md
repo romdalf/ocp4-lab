@@ -34,7 +34,14 @@ The following (virtual) machine will be required:
 Except for the bastion, all the (virtual) machine will be configured to boot from network as first option. The provided PXE boot menu will boot on the local drive if there isn't any actions.
 
 ## prerequisites 
-Once the bastion host is available, connect 
+Once the bastion host is available, make sure the bastion to connect via a SSH key pair. 
+
+### get ocp4-lab
+To get a local copy of the git repo, perform the following:
+
+```shell
+git clone https://github.com/rovandep/ocp4-lab.git
+```
 
 ### parameters_setup.yaml
 
