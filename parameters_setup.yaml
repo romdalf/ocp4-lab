@@ -3,6 +3,10 @@
 mypullsecret: ''
 
 ## DNS/DHCP settings
+
+dnsforwarder01: "8.8.8.8"
+dnsforwarder02: "8.8.4.4"
+
 clustername: "cluster"
 labdomain: "my.lab"
 dhcpiprange: "192.168.100"
@@ -14,3 +18,10 @@ bootstrapmac: ""
 master1mac: ""
 master2mac: ""
 master3mac: ""
+
+### For RHEL only
+## Credentials to connect to RHN CDN and using a pool ID
+## note this will be replace later in favor of Vault
+rhn_user: ""
+rhn_pass: ""
+rhn_pool: ""
