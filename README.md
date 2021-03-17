@@ -94,9 +94,19 @@ rhn_pass: ""
 rhn_pool: ""
 ```
 
-### The play
-Edit the inventory file to target your infra virtual machine.
-Then, run the play after customizing "parameters_setup.yml" with the following command:
+### customize inventory
+At the current stage, the inventory is not providing any advanced capabilities.
+
+```ini
+[BASTION]
+192.168.100.10
+#rhel7-infra ansible_host=192.168.100.10
+```
+Nothing else more to do than updating the IP of the bastion host.
+
+### run the play
+
+Run the play after customizing "parameters_setup.yml" with the following command:
 
 ```
 $ ansible-playbook -i inventory -e @parameters_lab_setup.yml lab_setup.yml
