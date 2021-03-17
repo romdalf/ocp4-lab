@@ -3,12 +3,12 @@ This set of ansible plays provides the necessary automation to deploy a Red Hat 
 Doing so provides a platform agnostic approach which will fit any on-prem or cloud based (supported or not) deployment. 
 
 Notes: 
-0. knowledge of OCP installation is required, this is not (yet) a fully assisted deployment.
+0. knowledge of OCP installation is required, this is not (yet) a fully assisted deployment but also a basic understanding of linux, dnsmasq, httpd, haproxy for potential customizations 
 1. a bastion host with 2vCPUs, 4GB RAM, and 30GB HDD should be sufficient running CentOS/RHEL7.x.
 2. if RHEL is used, valid subscriptions are required.
 3. the Red Hat variant of OCP4 requires a valid subscription after the 60 days of trial.
 
-## Environment
+## bastion overview
 The automation requires one CentOS (virtual) machine that provides the following services:
 - DNS
 - DHCP
@@ -33,8 +33,11 @@ The following (virtual) machine will be required:
 - 2 (virtual) machine for the worker nodes. 
 Except for the bastion, all the (virtual) machine will be configured to boot from network as first option. The provided PXE boot menu will boot on the local drive if there isn't any actions.
 
-## Using the plays
-### Parameters
+## prerequisites 
+Once the bastion host is available, connect 
+
+### parameters_setup.yaml
+
 First of all, if the bastion host is RHEL based, make sure the (V)M is registered and can install packages. If not, fix this first!
 
 Prior to start any plays, a couple of parameters are required to be defined within the "parameters_setup.yaml". 
