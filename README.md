@@ -114,7 +114,7 @@ $ ansible-playbook -i inventory -e @parameters_lab_setup.yml lab_setup.yml
 
 The following output is expected:
 
-```
+```bash
 $ ansible-playbook -i inventory -e @../parameters_lab_setup.yml lab_setup.yml 
 
 PLAY [DNSDHCP] ******************************************************************************
