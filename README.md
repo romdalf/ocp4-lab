@@ -92,6 +92,10 @@ worker2mac: ""
 rhn_user: ""
 rhn_pass: ""
 rhn_pool: ""
+## At the current stage, the automation detects the distribution
+## and if RHEL is detected, it will executed the registration based on the
+## above parameters. However, to avoid a breaking point, if rhn_user is 
+## empty, then the registration task is skipped.
 ```
 
 ### customize inventory
@@ -109,14 +113,12 @@ Nothing else more to do than updating the IP of the bastion host.
 Run the play after customizing "parameters_setup.yml" with the following command:
 
 ```
-$ ansible-playbook -i inventory -e @parameters_lab_setup.yml lab_setup.yml
+ansible-playbook -i inventory -e @parameters_lab_setup.yml lab_setup.yml
 ```
 
 The following output is expected:
 
-```bash
-$ ansible-playbook -i inventory -e @../parameters_lab_setup.yml lab_setup.yml 
-
+```
 PLAY [DNSDHCP] ******************************************************************************
 
 TASK [sysprep : Verify if host is already registered] ***************************************

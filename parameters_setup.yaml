@@ -1,3 +1,4 @@
+---
 ## DNS/DHCP settings
 ## use public or corporate DNS
 dnsforwarder01: "8.8.8.8"
@@ -41,3 +42,7 @@ worker2mac: ""
 rhn_user: ""
 rhn_pass: ""
 rhn_pool: ""
+## At the current stage, the automation detects the distribution
+## and if RHEL is detected, it will executed the registration based on the
+## above parameters. However, to avoid a breaking point, if rhn_user is 
+## empty, then the registration task is skipped.
