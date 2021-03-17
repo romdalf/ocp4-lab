@@ -7,7 +7,7 @@
 ## and do a system upgrade
 ##
 ## usage: -e "sysprep=yes"
-- hosts: DNSDHCP
+- hosts: BASTION
   gather_facts: false
   become: yes
   roles:
