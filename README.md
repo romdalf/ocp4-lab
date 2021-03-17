@@ -1,34 +1,37 @@
 # OpenShift Container Platform 4 Lab
-This set of ansible plays provides the necessary automation to deploy an OpenShift Container Platform v4.x (OCP4) lab environment using the bare metal UPI method.
-Doing so provides platform agnostic approach which will fit any on-prem or cloud based deployment. 
+This set of ansible plays provides the necessary automation to deploy a Red Hat OpenShift Container Platform v4.x (OCP4) lab environment using the bare metal UPI method.
+Doing so provides a platform agnostic approach which will fit any on-prem or cloud based (supported or not) deployment. 
 
 Notes: 
-0. knowledge of OCP installation is required, this is not (yet) a fully assisted deployment
-1. a single bastion host with 2vCPUs, 4GB RAM, and 30GB of HDD should be sufficient running CentOS/RHEL 7.x 
-2. if RHEL is used, valid subscriptions are required
+0. knowledge of OCP installation is required, this is not (yet) a fully assisted deployment.
+1. a bastion host with 2vCPUs, 4GB RAM, and 30GB HDD should be sufficient running CentOS/RHEL7.x.
+2. if RHEL is used, valid subscriptions are required.
+3. the Red Hat variant of OCP4 requires a valid subscription after the 60 days of trial.
 
 ## Environment
-The automation will require a first CentOS VM that provides the following services:
+The automation requires one CentOS (virtual) machine that provides the following services:
 - DNS
 - DHCP
 - PXE
-- HTTP
+- HTTPD
 - HAPROXY
 
-These services will help in provisioning and accessing the OCP4. Here is a diagram related to the provisioning workflow within the current state of the project:
+These services will help in provisioning and accessing the OCP4 environment. The following diagram  provides a provisioning workflow overview within the current state of the project:
 
 ![provisioning workflow](docs/prov_workflow.png)
 
-The above will help in the provisioning of the OCP4 environment. Note that the DNS & HAPROXY are not a replacement for enterprise solutions and should
-only be considered within the context of a lab or helper till the production DNS and load balancers are available and configured. 
+Note: the DNS and HAPROXY services are only for a lab environment within a self-contained bubble. If this automation is foreseen for a production deployment, the corporate DNS and load balancers should be used.
 
-The following (virtual) machines will be required
-- 1 (V)M for the bastion host
-- 1 (V)M for the OCP4 bootstrap, this one will be decommissioned at the end of the deployment
-- 3 (V)M for the master nodes acting also as workers (this is a lab!). 
-These (V)Ms will have:
-- the boot from network as first option to allow the PXE boot and don't forget the let the hard drive a secondary chose so that it can boot automatically
+This next diagram provide an access workflow overview within the current state of the project:
 
+![access worfklow](docs/access_workflow.png)
+
+The following (virtual) machine will be required:
+- 1 (virtual) machine for the bastion host.
+- 1 (virtual) machine for the bootstrap, it will be decommissioned at the end of the deployment.
+- 3 (virtual) machine for the master nodes acting. These can also act as workers.
+- 2 (virtual) machine for the worker nodes. 
+Except for the bastion, all the (virtual) machine will be configured to boot from network as first option. The provided PXE boot menu will boot on the local drive if there isn't any actions.
 
 ## Using the plays
 ### Parameters
