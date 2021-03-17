@@ -1,10 +1,4 @@
 ---
-## Credentials to connect to RHN CDN and using a pool ID
-## note this will be replace later in favor of Vault
-rhn_user: ""
-rhn_pass: ""
-rhn_pool: ""
-
 ## OCP Pull Secret
 mypullsecret: ''
 

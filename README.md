@@ -1,19 +1,23 @@
 # OpenShift Container Platform 4 Lab
-This set of ansible plays provides the necessary automation to deploy a OCP4 lab environment using the bare metal UPI method.
+This set of ansible plays provides the necessary automation to deploy an OpenShift Container Platform v4.x (OCP4) lab environment using the bare metal UPI method.
 Doing so provides platform agnostic approach which will fit any on-prem or cloud based deployment. 
 
 Notes: 
 0. knowledge of OCP installation is required, this is not (yet) a fully assisted deployment
-1. a single bastion host with 2vCPUs, 4GB RAM, and 30GB of HDD should be sufficient
+1. a single bastion host with 2vCPUs, 4GB RAM, and 30GB of HDD should be sufficient running CentOS/RHEL 7.x 
 2. if RHEL is used, valid subscriptions are required
 
 ## Environment
-The automation will require a first CentOS VM that will act as a:
-- DHCP server
-- DNS server
-- PXE server
-- HTTP server
-- HAPROXY server
+The automation will require a first CentOS VM that provides the following services:
+- DNS
+- DHCP
+- PXE
+- HTTP
+- HAPROXY
+
+These services will help in provisioning and accessing the OCP4. Here is a diagram related to the provisioning workflow within the current state of the project:
+
+![provisioning workflow](docs/prov_workflow.png)
 
 The above will help in the provisioning of the OCP4 environment. Note that the DNS & HAPROXY are not a replacement for enterprise solutions and should
 only be considered within the context of a lab or helper till the production DNS and load balancers are available and configured. 
@@ -25,18 +29,12 @@ The following (virtual) machines will be required
 These (V)Ms will have:
 - the boot from network as first option to allow the PXE boot and don't forget the let the hard drive a secondary chose so that it can boot automatically
 
-## Create the OCP4 lab
+
+## Using the plays
 ### Parameters
-Before using the lab_setup play, the following parameters need to be set within the file called "parameters_setup.yml":
+First of all, if the bastion host is RHEL based, make sure the (V)M is registered and can install packages. If not, fix this first!
 
-The following parameters are required to register the "infra" virtual machine to RHN or Satelitte and fetch a valid subscription. 
-rhn_user: "johndoe"
-rhn_pass: "mysupersecret"
-rhn_pool: "1234567890ABC"
-
-The following can be retrieve on the OpenShift Cluster Manager website and is required for the installation.
-mypullsecret: '{"auths": ...}'
-Note: mypullsecret needs to be enclosed between single quotes. If not, the play will fail. 
+Prior to start any plays, a couple of parameters are required to be defined within the "parameters_setup.yaml". 
 
 The following parameters are used to customized the OCP4 cluster. The
 clustername: "cluster"
