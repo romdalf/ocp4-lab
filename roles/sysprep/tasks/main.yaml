@@ -4,7 +4,9 @@
 #-------------------------------------------------------------------------------------------#
 ---
 - include: redhat.yaml
-  when: ansible_distribution == 'Red Hat Enterprise Linux' && rhn_user != ''
+  when: 
+    - ansible_distribution == 'Red Hat Enterprise Linux' 
+    - rhn_user is undefined
     
 - name: Update system
   yum:

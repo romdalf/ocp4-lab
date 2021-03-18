@@ -8,7 +8,7 @@
 ##
 ## usage: -e "sysprep=yes"
 - hosts: BASTION
-  gather_facts: false
+  gather_facts: true
   become: yes
   roles:
     - sysprep 
