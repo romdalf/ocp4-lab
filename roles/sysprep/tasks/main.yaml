@@ -30,4 +30,4 @@
     state: enabled
     immediate: yes 
     permanent: true
-  with_items: [dns,dhcp,http,tftp]
+  with_items: [dns,dhcp,http,tftp,jenkins]
