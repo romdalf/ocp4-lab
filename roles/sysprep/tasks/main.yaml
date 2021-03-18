@@ -23,11 +23,22 @@
       - tftp-server
     state: latest
 
-- name: Configure firewall for httpd
+- name: Configure firewall with standard services (dns, dhcp, tftp, http, https)
   firewalld: 
     zone: public
     service: "{{ item }}"
     state: enabled
     immediate: yes 
     permanent: true
-  with_items: [dns,dhcp,http,tftp,jenkins]
+  with_items: [dns,dhcp,http,https,tftp]
+
+- name: Configure firewall with custom port definitions (8080,6443,22623)
+  firewalld:
+    zone: public
+    port: "{{ item }}/tcp"
+    state: enabled
+    immediate: yes
+    permanent: true
+  with_items: [8080,6443,22623]
+
+  
