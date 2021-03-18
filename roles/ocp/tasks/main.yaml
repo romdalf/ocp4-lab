@@ -62,17 +62,17 @@
 #     url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-installer.x86_64.iso
 #     dest: /var/www/html/tftp/rhcos
 
-- name: Download latest RHCOS raw
+- name: Download latest RHCOS live rootfs for x64_86
   get_url:
     url: https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/latest/rhcos-live-rootfs.x86_64.img
     dest: /var/www/html/tftp/rhcos
 
-- name: Download latest RHCOS kernel
+- name: Download latest RHCOS live kernel for x64_86
   get_url:
     url: https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/latest/rhcos-live-kernel-x86_64
     dest: /var/www/html/tftp/rhcos
 
-- name: Download latest RHCOS initramfs
+- name: Download latest RHCOS live initramfs for x64_86
   get_url:
     url: https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/latest/rhcos-live-initramfs.x86_64.img
     dest: /var/www/html/tftp/rhcos
