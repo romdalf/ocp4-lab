@@ -57,23 +57,23 @@
     path: /var/www/html/tftp/pxelinux.cfg
     state: directory
 
-- name: Download latest RHCOS iso
-  get_url:
-    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-installer.x86_64.iso
-    dest: /var/www/html/tftp/rhcos
+# - name: Download latest RHCOS iso
+#   get_url:
+#     url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-installer.x86_64.iso
+#     dest: /var/www/html/tftp/rhcos
 
 - name: Download latest RHCOS raw
   get_url:
-    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-metal.x86_64.raw.gz
+    url: https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/latest/rhcos-live-rootfs.x86_64.img
     dest: /var/www/html/tftp/rhcos
 
 - name: Download latest RHCOS kernel
   get_url:
-    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-installer-kernel-x86_64
+    url: https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/latest/rhcos-live-kernel-x86_64
     dest: /var/www/html/tftp/rhcos
 
 - name: Download latest RHCOS initramfs
   get_url:
-    url: https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/latest/latest/rhcos-installer-initramfs.x86_64.img
+    url: https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/latest/rhcos-live-initramfs.x86_64.img
     dest: /var/www/html/tftp/rhcos
 
